@@ -6,37 +6,30 @@ class Feedback extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
-    positive: 0,
   };
 
-  //   handleIncrease = props => {
-  //     const name = props.value;
-  //     this.setState(prevState => ({
-  //       name: prevState.name + 1,
-  //     }));
-  //   };
+  handleIncrease = e => {
+    this.setState(prevState => ({
+      [e.target.value]: prevState[e.target.value] + 1,
+    }));
+  };
 
-  //   handleGoodIncrease = props => {
-  //     this.setState(prevState => ({
-  //       good: prevState.good + 1,
-  //     }));
-  //   };
+  countTotalFeedback = () => {
+    const estimates = Object.values(this.state);
 
-  //   handleNeutralIncrease = () => {
-  //     this.setState(prevState => ({
-  //       neutral: prevState.neutral + 1,
-  //     }));
-  //   };
+    return estimates.reduce((total, el) => total + el, 0);
+  };
 
-  //   handleBadIncrease = () => {
-  //     this.setState(prevState => ({
-  //       bad: prevState.bad + 1,
-  //     }));
-  //   };
+  countPositiveFeedbackPercentage = value => {
+    return this.countTotalFeedback()
+      ? Math.floor((value / this.countTotalFeedback()) * 100)
+      : 0;
+  };
 
   render() {
-    const { good, neutral, bad, total, positive } = this.state;
+    const { good, neutral, bad } = this.state;
+    const totalEstimates = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage(good);
 
     return (
       <section className={styles.section}>
@@ -46,7 +39,7 @@ class Feedback extends Component {
             type="button"
             className={styles.btn}
             onClick={this.handleIncrease}
-            value={good}
+            value="good"
           >
             Good
           </button>
@@ -54,7 +47,7 @@ class Feedback extends Component {
             type="button"
             className={styles.btn}
             onClick={this.handleIncrease}
-            value={neutral}
+            value="neutral"
           >
             Neutral
           </button>
@@ -62,7 +55,7 @@ class Feedback extends Component {
             type="button"
             className={styles.btn}
             onClick={this.handleIncrease}
-            value={bad}
+            value="bad"
           >
             Bad
           </button>
@@ -83,11 +76,11 @@ class Feedback extends Component {
           </p>
           <p className={styles.item}>
             Total:
-            <span>{total}</span>
+            <span>{totalEstimates}</span>
           </p>
           <p className={styles.item}>
             Positive:
-            <span>{positive}%</span>
+            <span>{positivePercentage}%</span>
           </p>
         </div>
       </section>
