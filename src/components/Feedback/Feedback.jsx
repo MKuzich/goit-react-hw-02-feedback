@@ -1,5 +1,7 @@
 import styles from './Feedback.module.css';
 import React, { Component } from 'react';
+import Statistics from 'components/Statistics/Statistics';
+import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 
 class Feedback extends Component {
   state = {
@@ -33,56 +35,17 @@ class Feedback extends Component {
 
     return (
       <section className={styles.section}>
-        <h2 className={styles.header}>Please, give us feedback</h2>
-        <div className="">
-          <button
-            type="button"
-            className={styles.btn}
-            onClick={this.handleIncrease}
-            value="good"
-          >
-            Good
-          </button>
-          <button
-            type="button"
-            className={styles.btn}
-            onClick={this.handleIncrease}
-            value="neutral"
-          >
-            Neutral
-          </button>
-          <button
-            type="button"
-            className={styles.btn}
-            onClick={this.handleIncrease}
-            value="bad"
-          >
-            Bad
-          </button>
-        </div>
-        <h2 className={styles.header}>Statistics</h2>
-        <div className={styles.wrapper}>
-          <p className={styles.item}>
-            Good:
-            <span className={styles.good}>{good}</span>
-          </p>
-          <p className={styles.item}>
-            Neutral:
-            <span className={styles.neutral}>{neutral}</span>
-          </p>
-          <p className={styles.item}>
-            Bad:
-            <span className={styles.bad}>{bad}</span>
-          </p>
-          <p className={styles.item}>
-            Total:
-            <span>{totalEstimates}</span>
-          </p>
-          <p className={styles.item}>
-            Positive:
-            <span>{positivePercentage}%</span>
-          </p>
-        </div>
+        <FeedbackOptions
+          options={this.state}
+          onLeaveFeedback={this.handleIncrease}
+        />
+        <Statistics
+          good={good}
+          neutral={neutral}
+          bad={bad}
+          total={totalEstimates}
+          positivePercentage={positivePercentage}
+        />
       </section>
     );
   }

@@ -1,40 +1,37 @@
-import {
-  StatsCard,
-  Title,
-  Stats,
-  StatsItem,
-  Label,
-  Value,
-} from './Statistics.styled';
-import { getRandomHexColor } from './getRandomHexColor';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import styles from './Statistics.module.css';
 
-export const Statistics = ({ title, stats }) => {
-  return (
-    <StatsCard>
-      {title && <Title>{title}</Title>}
-      <Stats>
-        {stats.map(item => (
-          <StatsItem
-            key={item.id}
-            quantity={stats.length}
-            style={{ backgroundColor: getRandomHexColor() }}
-          >
-            <Label>{item.label}</Label>
-            <Value>{item.percentage}%</Value>
-          </StatsItem>
-        ))}
-      </Stats>
-    </StatsCard>
-  );
-};
+class Statistics extends Component {
+  render() {
+    const { good, neutral, bad, total, positivePercentage } = this.props;
+    return (
+      <>
+        <h2 className={styles.header}>Statistics</h2>
+        <div className={styles.wrapper}>
+          <p className={styles.item}>
+            Good:
+            <span className={styles.good}>{good}</span>
+          </p>
+          <p className={styles.item}>
+            Neutral:
+            <span className={styles.neutral}>{neutral}</span>
+          </p>
+          <p className={styles.item}>
+            Bad:
+            <span className={styles.bad}>{bad}</span>
+          </p>
+          <p className={styles.item}>
+            Total:
+            <span>{total}</span>
+          </p>
+          <p className={styles.item}>
+            Positive:
+            <span>{positivePercentage}%</span>
+          </p>
+        </div>
+      </>
+    );
+  }
+}
 
-Statistics.propTypes = {
-  title: PropTypes.string,
-  stats: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      percentage: PropTypes.number.isRequired,
-    })
-  ),
-};
+export default Statistics;
