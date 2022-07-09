@@ -3,7 +3,6 @@ import styles from './FeedbackOptions.module.css';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <>
-    <h2 className={styles.header}>Please, give us feedback</h2>
     <div className="">
       <button
         type="button"
