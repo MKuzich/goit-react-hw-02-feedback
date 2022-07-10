@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './FeedbackOptions.module.css';
+import PropTypes from 'prop-types';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <>
@@ -33,3 +34,12 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => (
 );
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.shape({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }),
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
