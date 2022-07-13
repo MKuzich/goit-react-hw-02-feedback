@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
-.btn:not(:last-child) {
+.list {
+  display: flex;
+}
+
+.item:not(:last-child) {
   margin-right: 16px;
 }

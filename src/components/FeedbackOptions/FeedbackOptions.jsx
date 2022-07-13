@@ -2,36 +2,29 @@ import React from 'react';
 import styles from './FeedbackOptions.module.css';
 import PropTypes from 'prop-types';
 
-const FeedbackOptions = ({ options, onLeaveFeedback }) => (
-  <>
-    <div className="">
-      <button
-        type="button"
-        className={styles.btn}
-        onClick={onLeaveFeedback}
-        value={Object.keys(options)[0]}
-      >
-        Good
-      </button>
-      <button
-        type="button"
-        className={styles.btn}
-        onClick={onLeaveFeedback}
-        value={Object.keys(options)[1]}
-      >
-        Neutral
-      </button>
-      <button
-        type="button"
-        className={styles.btn}
-        onClick={onLeaveFeedback}
-        value={Object.keys(options)[2]}
-      >
-        Bad
-      </button>
-    </div>
-  </>
-);
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  return (
+    <>
+      <ul className={styles.list}>
+        {Object.entries(options).map(item => {
+          const name = item[0].charAt(0).toUpperCase() + item[0].slice(1);
+          return (
+            <li className={styles.item} key={item[0]}>
+              <button
+                type="button"
+                className={styles.btn}
+                onClick={onLeaveFeedback}
+                value={item[0]}
+              >
+                {name}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </>
+  );
+};
 
 export default FeedbackOptions;
 
