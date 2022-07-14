@@ -36,7 +36,7 @@ export class App extends Component {
       <>
         <Section title="Please, give us your feedback">
           <FeedbackOptions
-            options={this.state}
+            options={{ good, neutral, bad }}
             onLeaveFeedback={this.handleIncrease}
           />
         </Section>
