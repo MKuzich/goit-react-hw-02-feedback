@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Statistics from 'components/Statistics/Statistics';
 import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 import Section from 'components/Section/Section';
@@ -36,7 +35,7 @@ export class App extends Component {
       <>
         <Section title="Please, give us your feedback">
           <FeedbackOptions
-            options={{ good, neutral, bad }}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.handleIncrease}
           />
         </Section>

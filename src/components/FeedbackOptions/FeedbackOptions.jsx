@@ -6,15 +6,15 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
       <ul className={styles.list}>
-        {Object.entries(options).map(item => {
-          const name = item[0].charAt(0).toUpperCase() + item[0].slice(1);
+        {options.map(item => {
+          const name = item.charAt(0).toUpperCase() + item.slice(1);
           return (
-            <li className={styles.item} key={item[0]}>
+            <li className={styles.item} key={item}>
               <button
                 type="button"
                 className={styles.btn}
                 onClick={onLeaveFeedback}
-                value={item[0]}
+                value={item}
               >
                 {name}
               </button>
@@ -29,10 +29,6 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 export default FeedbackOptions;
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.shape({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }),
+  options: PropTypes.arrayOf(PropTypes.string.isRequired),
   onLeaveFeedback: PropTypes.func.isRequired,
 };
